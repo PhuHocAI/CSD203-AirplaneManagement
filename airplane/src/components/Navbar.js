@@ -5,20 +5,25 @@ import "./Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="navbar">
-      <div className="navbar-title">
-        <img src={logo} alt="Airplane Logo" className="navbar-logo" />
-      </div>
-
+    <div className="navbar">
+      <img src={logo} alt="Airplane Logo" className="navbar-logo" />
       <div className="navbar-links">
         <Link to="/" className="nav-link">
           Home
         </Link>
         <Link to="/manage" className="nav-link">
-          Airport Management
+          Manage
         </Link>
       </div>
-    </nav>
+      <div className="navbar-auth">
+        <Link to="/login" className="nav-link">
+          Log in
+        </Link>
+        <Link to="/register" className="nav-link">
+          Register
+        </Link>
+      </div>
+    </div>
   );
 }
 

@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  height: 50px; /* Chiều cao cố định cho navbar để kiểm soát tốt hơn */
+}
+
+.navbar-logo img {
+  max-height: 100%; /* Giới hạn chiều cao tối đa của logo bằng chiều cao của navbar */
+  width: auto; /* Điều chỉnh chiều rộng tự động để giữ tỉ lệ */
+  margin-right: 10px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  height: 100%; /* Đảm bảo các liên kết căn chỉnh với chiều cao navbar */
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 16px; /* Điều chỉnh kích thước font nếu cần */
+}
+
+.nav-link:last-child {
+  margin-right: 0;
+}

@@ -38,7 +38,7 @@
 }
 
 .container {
-  position: relative; /* Cho phép logo được định vị tuyệt đối so với container này */
+  /* position: relative; Cho phép logo được định vị tuyệt đối so với container này */
   height: 100vh; /* Giữ nguyên chiều cao này nếu bạn muốn logo và nội dung giữa khung */
   display: flex;
   justify-content: center;
@@ -48,6 +48,6 @@
 
 .logo {
   position: absolute;
-  top: 10px; /* Khoảng cách từ đỉnh container */
-  left: 10px; /* Khoảng cách từ cạnh trái container */
+  top: 100px; /* Khoảng cách từ đỉnh container */
+  left: 20px; /* Khoảng cách từ cạnh trái container */
 }

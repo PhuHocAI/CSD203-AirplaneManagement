@@ -8,13 +8,13 @@ from typing import Dict, List
 class Airport(Model):
     id = fields.IntField(pk=True, index=True)
     name = fields.CharField(max_length=50, unique=True, null=False)
-    routes = fields.ReverseRelation["FlightRoute"]
 
 class FlightRoute(Model):
     id = fields.IntField(pk=True)
-    airport = fields.ForeignKeyField('models.Airport', related_name='routes')
+    owner = fields.IntField(null=False)
     destination = fields.CharField(max_length=50, null=False)
     cost = fields.FloatField()
+    airport = fields.ForeignKeyField('models.Airport', related_name='routes')
 
 Airport_Pydantic = pydantic_model_creator(Airport, name="Airport",)
 AirportIn_Pydantic = pydantic_model_creator(Airport, name="AirportIn", exclude_readonly=True)
@@ -24,5 +24,6 @@ AirportWithRoutes_Pydantic = pydantic_model_creator(
 
 
 FlightRoute_Pydantic = pydantic_model_creator(
-    FlightRoute, name="FlightRoute", include=("id", "destination", "cost")
+    FlightRoute, name="FlightRoute", include=("id", "destination", "cost", "owner")
 )
+FlightRouteIn_Pydantic = pydantic_model_creator(FlightRoute, name="FlightRouteIn", exclude_readonly=True)

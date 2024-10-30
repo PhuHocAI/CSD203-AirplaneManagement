@@ -14,46 +14,34 @@ register_tortoise(
     add_exception_handlers=True,
 )
 
-@app.get("/")
-async def root():
-    return {"message": "Welcome to the Airport Management System with Tortoise ORM!"}
+@app.post("/airport/add")
+async def add_airport(airport: AirportIn_Pydantic):
+    new_airport = await add_airport_service(airport)
+    return {
+        "message": "Airport added successfully",
+        "data": new_airport
+    }
 
-############ Add Airport ############
-
-@app.post("/airport/add_airport")
-async def add_airport(airport: Airport_Pydantic):  # type: ignore
-    response = await add_airport_service(airport)
-    return response
-
-############ Delete Airport ############
-
-@app.delete("/airport/delete_airport/{airport_id}")
+@app.delete("/airport/delete/{airport_id}")
 async def delete_airport(airport_id: int):
-    response = await delete_airport_service(airport_id)
-    return response
+    return await delete_airport_service(airport_id)
 
-############ Display Airports ############
+@app.get("/airport/display")
+async def display_airport():
+    responses = await display_airport_service()
+    return {
+        "message": "List of airports",
+        "data": responses
+    }
 
-@app.get("/airports_with_routes", response_model=List[AirportWithRoutes_Pydantic])
-async def get_airports_with_routes():
-    response = await get_airports_with_routes_service()
-    return response
+@app.put("/airport/update/{airport_id}")
+async def update_airport(airport_id: int, airport: AirportIn_Pydantic):
+    return await update_airport_service(airport_id, airport)
 
-############ Update Airport ############
-@app.put("/airport/update_airport/{airport_id}")
-async def update_airport(airport_id: int, airport_data: dict):
-    response = await update_airport_service(airport_id, airport_data)
-    return response
+@app.get("/airport/search_by_name/{airport_name}")
+async def search_airport_by_name(airport_name: str):
+    return await search_airport_by_name_service(airport_name)
 
-
-############ Calculate Route Cost Time ############
-@app.get("/airport/calculate_route_cost_time")
-async def get_route_cost_time(start_airport_id: int, end_airport_id: int):
-    response = await calculate_route_cost_time(start_airport_id, end_airport_id)
-    return response
-
-############ Find Shortest Route ############
-@app.get("/airport/find_shortest_route")
-async def shortest_route(start_airport_id: int, end_airport_id: int):
-    response = await find_shortest_route(start_airport_id, end_airport_id)
-    return response
+@app.get("/airport/calculate_cost/{airport_des}/{airport_dep}")
+async def calculate_cost(airport_des: int, airport_dep: int):
+    return await calculate_cost_service(airport_dep, airport_des)
